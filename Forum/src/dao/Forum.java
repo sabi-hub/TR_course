@@ -1,6 +1,8 @@
 package dao;
 
 import data.Post;
+import data.User;
+import data.UserAdmin;
 
 public class Forum {
 
@@ -27,7 +29,7 @@ public class Forum {
 
     public  boolean deletePost (int id){
         for (int i = 0; i < size; i++) {
-            if (posts[i].getPostID()==id {
+            if (posts[i].getPostID()==id) {
                 posts[i] = posts[size - 1];
                 size--;
                 return true;
@@ -44,7 +46,7 @@ public class Forum {
 
     public boolean updatePost(int postID, String newContent){
         for(int i=0; i<size; i++){
-            if(posts[i].getPostID()==postID && posts[i].getContent().equalsIgnoreCase(newContent){
+            if(posts[i].getPostID()==postID && posts[i].getContent().equalsIgnoreCase(newContent)&& ){
                 posts[i].setContent(newContent);
                 return true;
             }
@@ -58,7 +60,7 @@ public class Forum {
         for(int i=0; i<size; i++){
             if(posts[i].getAuthor().getUserName()==author && j<numberOfPosts){
                 authorsPost[j]=posts[i];
-                i++
+                i++;
             }
         }
         return authorsPost;
@@ -71,6 +73,7 @@ public class Forum {
                 return posts[i].getLikes();
             }
         }
+        return 0;
     }
 
 

@@ -8,14 +8,11 @@ public class Post extends User {
     public int likes =0;
 
     public Post(User author, int postID, String title, String content) {
+        super();
         this.author = author;
         this.postID = postID;
         this.title = title;
         this.content = content;
-    }
-
-    public void addLike(likes){
-
     }
 
     public int getPostID() {

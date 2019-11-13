@@ -5,7 +5,7 @@ public class User {
     private String userName;
     private int age;
 
-    public User(String userName, int age) {
+    public User() {
         this.userName = userName;
         this.age = age;
     }
