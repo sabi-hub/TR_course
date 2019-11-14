@@ -7,11 +7,10 @@ public class Post extends User {
     private String content;
     public int likes =0;
 
-    public Post(User author, int postID, String title, String content) {
-        super();
+    public Post(User author, int postID, String postTitle, String content) {
         this.author = author;
         this.postID = postID;
-        this.title = title;
+        this.title = postTitle;
         this.content = content;
     }
 

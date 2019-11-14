@@ -4,6 +4,8 @@ import data.Post;
 import data.User;
 import data.UserAdmin;
 
+import java.util.Scanner;
+
 public class Forum {
 
     private Post[] posts;
@@ -44,15 +46,6 @@ public class Forum {
         }
     }
 
-    public boolean updatePost(int postID, String newContent){
-        for(int i=0; i<size; i++){
-            if(posts[i].getPostID()==postID && posts[i].getContent().equalsIgnoreCase(newContent)&& ){
-                posts[i].setContent(newContent);
-                return true;
-            }
-        }
-        return false;
-    }
 
     public Post[] getPostByAuthor(String author, int numberOfPosts){
         Post[] authorsPost = new Post[numberOfPosts];
@@ -74,6 +67,38 @@ public class Forum {
             }
         }
         return 0;
+    }
+    public boolean checkPassword(){
+        Scanner scanner = new Scanner(System.in);
+        for (int i=0; i<size; i++){
+            if (posts[i].getAuthor().getClass().getSimpleName().equalsIgnoreCase("UserAdmin")){ //указывается классю UserAdmin везде класс
+                UserAdmin admin =  (UserAdmin)posts[i].getAuthor(); //(UserAdmin) - кастомизация. В явном виде указывается приводим к определенному классу
+                System.out.println("Enter password, please");
+                String password = scanner.nextLine();
+                if(admin.getPassword().equalsIgnoreCase(password)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public void updatePostByAdmin(int postId){
+        Scanner scanner = new Scanner(System.in);
+        if(checkPassword()){
+            for(int i=0; i<size; i++){
+                if(posts[i].getPostID() == postId){
+                    System.out.println("Enter new content, please");
+                    String newContent = scanner.nextLine();
+                    posts[i].setContent(newContent);
+                    System.out.println(postId+" content changed to "+posts[i].getContent());
+                }
+            }
+
+        }
+        else{
+            System.out.println("access is denied");
+        }
     }
 
 
