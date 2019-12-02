@@ -5,7 +5,6 @@ import java.util.Arrays;
 public class SortedNumbersList {
 
     private int[] source;
-//    int[] another;
 
     public SortedNumbersList(){
         this.source=new int[0];
@@ -93,22 +92,22 @@ public class SortedNumbersList {
 
         for (int i = 0; i < this.source.length; i++) {
             for (int j = 0; j < another.source.length; j++) {
-                if (this.source[i] == another.source[i])
+                if (this.source[i] == another.source[j])
                     intersection++;
             }
         }
         int[] result = new int[intersection];
-        SortedNumbersList resultList = new SortedNumbersList(result);
 
+        int index=0;
         for (int i = 0; i < this.source.length; i++) {
             for (int j = 0; j < another.source.length; j++) {
                 if (this.source[i] == another.source[j]) {
-                    resultList.add(this.source[i]);
-
+                    result[index++]=this.source[i];
                 }
             }
         }
-
+        SortedNumbersList resultList = new SortedNumbersList(result);
+        resultList.removeRepeated();
         return resultList;
     }
 

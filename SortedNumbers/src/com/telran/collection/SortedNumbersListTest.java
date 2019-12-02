@@ -269,30 +269,36 @@ public class SortedNumbersListTest {
     }
 
     @Test
-    public void testIntersection_nonEmptyObject_twoArraysSameLength(){
-        SortedNumbersList sourceArray = new SortedNumbersList(new int[]{1,2,3,4});
-        SortedNumbersList anotherArray = new SortedNumbersList(new int[]{3,4,5,6});
-        sourceArray.intersection(anotherArray);
-        int[]expected = {3,4};
-        assertEquals(2,expected.length);
+    public void testIntersection_nonEmptyObject_twoArraysSameLengthRemovesDoubles(){
+        SortedNumbersList sourceArray = new SortedNumbersList(new int[]{1,2,3,3,4});
+        SortedNumbersList anotherArray = new SortedNumbersList(new int[]{3,4,4,5,6});
+        SortedNumbersList expected=sourceArray.intersection(anotherArray);
+        assertEquals(2,expected.size());
+        assertEquals(3,expected.get(0));
+        assertEquals(4,expected.get(1));
+
     }
 
     @Test
-    public void testIntersection_nonEmptyObject_twoArraysDifferentLength(){
+    public void testIntersection_nonEmptyObject_twoArraysDifferentLengthRemovesDoubles(){
         SortedNumbersList sourceArray = new SortedNumbersList(new int[]{1,2,3,4});
-        SortedNumbersList anotherArray = new SortedNumbersList(new int[]{3,4,5,6,7});
-        sourceArray.intersection(anotherArray);
-        int[]expected = {3,4};
-        assertEquals(2,expected.length);
+        SortedNumbersList anotherArray = new SortedNumbersList(new int[]{3,3,4,5,6,7});
+        SortedNumbersList expected=sourceArray.intersection(anotherArray);
+        assertEquals(2,expected.size());
+        assertEquals(3,expected.get(0));
+        assertEquals(4,expected.get(1));
     }
 
     @Test
     public void testUnion_nonEmptyObject_twoArraysSameLength(){
         SortedNumbersList sourceArray = new SortedNumbersList(new int[]{1,2,3,4});
         SortedNumbersList anotherArray = new SortedNumbersList(new int[]{3,4,5,6});
-        sourceArray.union(anotherArray);
-        int[]expected={1,2,3,4,5,6};
-        assertEquals(6,expected.length);
+        SortedNumbersList expected=sourceArray.union(anotherArray);
+        assertEquals(6,expected.size());
+        assertEquals(1,expected.get(0));
+        assertEquals(3,expected.get(2));
+        assertEquals(6,expected.get(5));
+
     }
 
     @Test
@@ -300,8 +306,11 @@ public class SortedNumbersListTest {
         SortedNumbersList sourceArray = new SortedNumbersList(new int[]{1,2,3,4});
         SortedNumbersList anotherArray = new SortedNumbersList(new int[]{3,4,5,});
         sourceArray.union(anotherArray);
-        int[]expected={1,2,3,4,5};
-        assertEquals(5,expected.length);
+        SortedNumbersList expected=sourceArray.union(anotherArray);
+        assertEquals(5,expected.size());
+        assertEquals(1,expected.get(0));
+        assertEquals(3,expected.get(2));
+        assertEquals(5,expected.get(4));
     }
 
 //    @Test
