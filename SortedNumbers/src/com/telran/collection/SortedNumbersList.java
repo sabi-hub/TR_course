@@ -29,6 +29,11 @@ public class SortedNumbersList {
         return this.source.length;
     }
 
+    public boolean contains(int number){
+        int index = ArrayUtils.binarySearch(this.source,number);
+        return index>=0;
+    }
+
     /**
      * removes element by index
      * @param index of the element to remove
@@ -60,8 +65,8 @@ public class SortedNumbersList {
 
     public void removeRepeated(){
         //для пустого метода, если ноль, то окончание программы - возврат 0
-//        if(this.source.length==0)
-//            return;
+        if(this.source.length==0)
+            return;
 
         int unique = 1;
         for (int i = 1; i < this.source.length; i++) {
@@ -87,28 +92,45 @@ public class SortedNumbersList {
         this.source = result;
     }
 
-    public SortedNumbersList intersection (SortedNumbersList another){
-        int intersection = 0;
+//    public SortedNumbersList intersection (SortedNumbersList another){
+//        int intersection = 0;
+//
+//        for (int i = 0; i < this.source.length; i++) {
+//            for (int j = 0; j < another.source.length; j++) {
+//                if (this.source[i] == another.source[j])
+//                    intersection++;
+//            }
+//        }
+//        int[] result = new int[intersection];
+//
+//        int index=0;
+//        for (int i = 0; i < this.source.length; i++) {
+//            for (int j = 0; j < another.source.length; j++) {
+//                if (this.source[i] == another.source[j]) {
+//                    result[index++]=this.source[i];
+//                }
+//            }
+//        }
+//        SortedNumbersList resultList = new SortedNumbersList(result);
+//        resultList.removeRepeated();
+//        return resultList;
+//    }
 
-        for (int i = 0; i < this.source.length; i++) {
-            for (int j = 0; j < another.source.length; j++) {
-                if (this.source[i] == another.source[j])
-                    intersection++;
-            }
+    public SortedNumbersList intersection(SortedNumbersList another){
+        int newSize = 0;
+        for (int i = 0; i <source.length ; i++) {
+            if(another.contains(source[i]))
+                newSize++;
         }
-        int[] result = new int[intersection];
-
+        int[]newSource = new int[newSize];
         int index=0;
-        for (int i = 0; i < this.source.length; i++) {
-            for (int j = 0; j < another.source.length; j++) {
-                if (this.source[i] == another.source[j]) {
-                    result[index++]=this.source[i];
-                }
-            }
+        for (int i = 0; i <source.length ; i++) {
+            if(another.contains(source[i]))
+                newSource[index++]=source[i];
         }
-        SortedNumbersList resultList = new SortedNumbersList(result);
-        resultList.removeRepeated();
-        return resultList;
+        SortedNumbersList intersection = new SortedNumbersList(newSource);
+        intersection.removeRepeated();
+        return intersection;
     }
 
     public SortedNumbersList union (SortedNumbersList another){

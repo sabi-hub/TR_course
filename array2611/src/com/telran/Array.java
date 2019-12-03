@@ -46,7 +46,7 @@ public class Array {
     }
 
     public void insert(int index, int number) {
-        this.source = ArrayUtils.insertLesson(this.source, index, number);
+        this.source = ArrayUtils.insert(this.source, index, number);
     }
 
     public void removeById(int index) {

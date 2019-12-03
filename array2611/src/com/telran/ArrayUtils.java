@@ -20,7 +20,7 @@ public class ArrayUtils {
 //        System.out.println("New Array with addition value " + Arrays.toString(resArray));
 //        return resArray;
 
-        int[] result = insertLesson(array, array.length, value);
+        int[] result = insert(array, array.length, value);
 
         //System.out.println("New Array with addition value " + Arrays.toString(result));
         return result;
@@ -43,7 +43,7 @@ public class ArrayUtils {
 //        return resArray;
 //    }
 
-    public static int[] insertLesson(int[] array, int index, int number) {
+    public static int[] insert(int[] array, int index, int number) {
         int[] result = new int[array.length + 1];
 
         for (int i = 0; i < index; i++) {
