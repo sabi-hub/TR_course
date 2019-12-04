@@ -9,15 +9,9 @@ public class Picture extends Shape{
     }
 
 
-    public Shape[] getShapes() {
+    public void draw() {
         for (int i = 0; i <shapes.length ; i++) {
             shapes[i].draw();
         }
-        return shapes;
-    }
-
-    @Override
-    void draw() {
-
     }
 }

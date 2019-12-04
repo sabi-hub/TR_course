@@ -17,7 +17,7 @@ public class Application {
         Shape[]shapes = {line, rectangle};
 
         Picture picture = new Picture(shapes);
-        System.out.println(picture.getShapes());
+        picture.draw();
 
 
 
