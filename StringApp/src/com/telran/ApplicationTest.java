@@ -25,10 +25,10 @@ public class ApplicationTest {
         String pattern2 = ", ";
         String pattern3 = "l";
 
-        assertEquals(3, string.countIndexOf(pattern,text));
-        assertEquals(3, string.countIndexOf(pattern1,text));
-        assertEquals(2, string.countIndexOf(pattern2,text));
-        assertEquals(6, string.countIndexOf(pattern3,text));
+        assertEquals(3, string.entrances(pattern,text));
+        assertEquals(3, string.entrances(pattern1,text));
+        assertEquals(2, string.entrances(pattern2,text));
+        assertEquals(6, string.entrances(pattern3,text));
 
     }
     @Test
@@ -40,10 +40,10 @@ public class ApplicationTest {
         String pattern3 = "L";
         String pattern2 = ", ";
 
-        assertEquals(3, string.countIndexOf(pattern,text));
-        assertEquals(3, string.countIndexOf(pattern1,text));
-        assertEquals(2, string.countIndexOf(pattern2,text));
-        assertEquals(6, string.countIndexOf(pattern3,text));
+        assertEquals(3, string.entrances(pattern,text));
+        assertEquals(3, string.entrances(pattern1,text));
+        assertEquals(2, string.entrances(pattern2,text));
+        assertEquals(6, string.entrances(pattern3,text));
 
     }
 
@@ -56,10 +56,10 @@ public class ApplicationTest {
         String pattern3 = "l";
         String pattern2 = ", ";
 
-        assertEquals(3, string.countIndexOf(pattern,text));
-        assertEquals(3, string.countIndexOf(pattern1,text));
-        assertEquals(2, string.countIndexOf(pattern2,text));
-        assertEquals(6, string.countIndexOf(pattern3,text));
+        assertEquals(3, string.entrances(pattern,text));
+        assertEquals(3, string.entrances(pattern1,text));
+        assertEquals(2, string.entrances(pattern2,text));
+        assertEquals(6, string.entrances(pattern3,text));
 
     }
 
@@ -72,10 +72,10 @@ public class ApplicationTest {
         String pattern3 = "L";
         String pattern2 = ", ";
 
-        assertEquals(3, string.countIndexOf(pattern,text));
-        assertEquals(3, string.countIndexOf(pattern1,text));
-        assertEquals(2, string.countIndexOf(pattern2,text));
-        assertEquals(6, string.countIndexOf(pattern3,text));
+        assertEquals(3, string.entrances(pattern,text));
+        assertEquals(3, string.entrances(pattern1,text));
+        assertEquals(2, string.entrances(pattern2,text));
+        assertEquals(6, string.entrances(pattern3,text));
 
     }
 
