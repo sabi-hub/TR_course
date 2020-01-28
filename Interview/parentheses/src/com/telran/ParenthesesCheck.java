@@ -11,7 +11,7 @@ public class ParenthesesCheck<E> {
 
         Deque<Character> stack = new ArrayDeque<>();
         stack.addLast('*');
-        
+
         for (int i = 0; i < text.length(); i++) {
             char bracket = text.charAt(i);
             if (bracket == '(' || bracket == '[' || bracket == '{') {
