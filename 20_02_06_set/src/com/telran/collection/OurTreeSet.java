@@ -72,55 +72,55 @@ public class OurTreeSet<E> implements OurSet<E> {
         if (nodeToRemove == null)
             return false;
 
-        if (nodeToRemove.left==null||nodeToRemove.right==null)
-            linialRemove (nodeToRemove);
+        if (nodeToRemove.left == null || nodeToRemove.right == null)
+            linealRemove(nodeToRemove);
         else
             junctionRemove(nodeToRemove);
 
-        size --;
+        size--;
         return true;
     }
 
     private void junctionRemove(TreeNode<E> nodeToRemove) {
         TreeNode<E> needle = nodeToRemove.right; //чтобы спуститься по левой части, переходим на правый нод
 
-        while (needle.left!=null)//спускаемся по левой части до самого конца
+        while (needle.left != null)//спускаемся по левой части до самого конца
             needle = needle.left;
 
         nodeToRemove.key = needle.key;//значение найденного в левой части нода переписываем в удаляемый нод
-        linialRemove(needle); // чистим левый новый нод линейным способом
+        linealRemove(needle); // чистим левый новый нод линейным способом
 
     }
 
-    private void linialRemove(TreeNode<E> nodeToRemove) {
+    private void linealRemove(TreeNode<E> nodeToRemove) {
         TreeNode<E> parent = nodeToRemove.parent;
-        TreeNode<E> child = nodeToRemove.left == null? nodeToRemove.right:nodeToRemove.left;
+        TreeNode<E> child = nodeToRemove.left == null ? nodeToRemove.right : nodeToRemove.left;
 
-        if (parent==null) {
+        if (parent == null) {
             root = child;
-        } else if(parent.right==nodeToRemove){
-            parent.right=child; //создаем ссылку к новому ребенку
-        } else{
+        } else if (parent.right == nodeToRemove) {
+            parent.right = child; //создаем ссылку к новому ребенку
+        } else {
             parent.left = child;
         }
 
-        if(child!=null)
+        if (child != null)
             child.parent = parent; // от ребенка делаем обратную ссылку к родителю
 
         clearNode(nodeToRemove);
     }
 
-    private void clearNode(TreeNode<E> nodeToRemove){
-        nodeToRemove.key=null;
-        nodeToRemove.left=null;
-        nodeToRemove.right=null;
-        nodeToRemove.parent=null;
+    private void clearNode(TreeNode<E> nodeToRemove) {
+        nodeToRemove.key = null;
+        nodeToRemove.left = null;
+        nodeToRemove.right = null;
+        nodeToRemove.parent = null;
     }
 
     @Override
     public boolean contains(E e) {
 
-        return (getNode(e)!=null);
+        return (getNode(e) != null);
 
         //without method getNode
 //        TreeNode<E> current = root;
@@ -135,7 +135,7 @@ public class OurTreeSet<E> implements OurSet<E> {
 //        return false;
     }
 
-    private TreeNode<E> getNode(E e){
+    private TreeNode<E> getNode(E e) {
         TreeNode<E> current = root;
 
         while (current != null && comparator.compare(current.key, e) != 0) {
@@ -150,18 +150,34 @@ public class OurTreeSet<E> implements OurSet<E> {
     }
 
     @Override
-    public boolean addAll(OurSet other) {
-        return false;
+    public boolean addAll(OurSet<E> other) {
+        boolean res = false;
+        for (E e : other) {
+            res |= this.add(e);
+        }
+        return res;
     }
 
     @Override
-    public boolean removeAll(OurSet other) {
-        return false;
+    public boolean removeAll(OurSet<E> other) {
+        boolean res = false;
+        for (E e : other) {
+            res |= this.remove(e);
+        }
+
+        return res;
     }
 
     @Override
-    public boolean retainAll(OurSet other) {
-        return false;
+    public boolean retainAll(OurSet<E> other) {
+        OurSet<E> temp = new OurHashSet<>();
+
+        for(E e:this){
+            if(!other.contains(e))
+                temp.add(e);
+        }
+
+        return this.removeAll((temp));
     }
 
     @Override
@@ -169,32 +185,28 @@ public class OurTreeSet<E> implements OurSet<E> {
         return new OurTreeSetIterator<>(this);
     }
 
-
     static class TreeNode<E> {
-
         TreeNode<E> left;
         TreeNode<E> right;
         TreeNode<E> parent;
-
         E key;
-
     }
 
 }
 
 
-class OurTreeSetIterator <E> implements Iterator<E>{
+class OurTreeSetIterator<E> implements Iterator<E> {
 
     private OurTreeSet<E> treeSet;
     private OurTreeSet.TreeNode<E> current;
 
     OurTreeSetIterator(OurTreeSet<E> treeSet) {
-        this.treeSet=treeSet;
-        this.current = treeSet.root==null? null: getLeast(treeSet.root);//getLeast accept element which != null
+        this.treeSet = treeSet;
+        this.current = treeSet.root == null ? null : getLeast(treeSet.root);//getLeast accept element which != null
     }
 
     private OurTreeSet.TreeNode<E> getLeast(OurTreeSet.TreeNode<E> current) {
-        while (current.left!=null)//спускаемся по левой части до самого конца
+        while (current.left != null)//спускаемся по левой части до самого конца
             current = current.left;
 
         return current;
@@ -202,16 +214,16 @@ class OurTreeSetIterator <E> implements Iterator<E>{
 
     @Override
     public boolean hasNext() {
-        return current!=null;
+        return current != null;
     }
 
     @Override
     public E next() {
         E res = current.key;
 
-        if(current.right!=null){
+        if (current.right != null) {
             current = getLeast(current.right);
-        }else{
+        } else {
             current = firstRightParent(current);
         }
 
@@ -220,13 +232,14 @@ class OurTreeSetIterator <E> implements Iterator<E>{
 
     /**
      * the method finds the first parent which is to the right from current
+     *
      * @param current element
      * @return next element by order if exists or null, if current is the most right element in the TreeSet
      */
     private OurTreeSet.TreeNode<E> firstRightParent(OurTreeSet.TreeNode<E> current) {
         OurTreeSet.TreeNode<E> parent = current.parent;
 
-        while (parent!=null && parent.left!=current) {
+        while (parent != null && parent.left != current) {
             current = parent;
             parent = current.parent;
         }

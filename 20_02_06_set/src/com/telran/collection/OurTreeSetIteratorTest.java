@@ -41,7 +41,7 @@ public class OurTreeSetIteratorTest {
     }
 
     @Test
-    public void testNext() {
+    public void testNext_forElements() {
         treeSet.add(10);
         treeSet.add(8);
         treeSet.add(5);
@@ -59,6 +59,26 @@ public class OurTreeSetIteratorTest {
             res.add(i);
 
         assertEquals(4,treeSet.size());
+        assertEquals(expected,res);
+
+    }
+
+    @Test
+    public void testNext_oneElement() {
+        treeSet.add(10);
+
+        int[] treeNodes = {10};
+
+        List<Integer> expected =new ArrayList<>();
+        for(Integer i:treeNodes)
+            expected.add(i);
+
+        List<Object> res = new ArrayList<>();
+
+        for(Integer i:treeSet)
+            res.add(i);
+
+        assertEquals(1,treeSet.size());
         assertEquals(expected,res);
 
     }
