@@ -245,16 +245,16 @@ public class OurHashSetTest {
     @Test
     public void testRetainAll_treeElementsNoRepeated_False(){
 
-        hashSet.add(3);
-        hashSet.add(-3);
-        hashSet.add(5);
+        hashSet.add(2);
+        hashSet.add(1);
+        hashSet.add(4);
 
         other.add(2);
         other.add(1);
         other.add(4);
+        other.add(5);
 
         assertFalse(hashSet.retainAll(other));
-        assertEquals(0,hashSet.size());
 
     }
 

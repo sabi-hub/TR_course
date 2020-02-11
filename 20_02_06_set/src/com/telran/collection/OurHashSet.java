@@ -1,6 +1,7 @@
 package com.telran.collection;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class OurHashSet<E> implements OurSet<E> {
@@ -34,10 +35,10 @@ public class OurHashSet<E> implements OurSet<E> {
 
     @Override
     public boolean addAll(OurSet<E> other) {
-        OurHashSet<E> narrowedOther = (OurHashSet<E>) other;
+//        OurHashSet<E> narrowedOther = (OurHashSet<E>) other;
 
         boolean res = false;
-        for (E e : narrowedOther.source.keySet()) {
+        for (E e : other) {
             res |= this.add(e);
 //            res = this.add(e)|res;
         }
@@ -46,10 +47,9 @@ public class OurHashSet<E> implements OurSet<E> {
 
     @Override
     public boolean removeAll(OurSet<E> other) {
-        OurHashSet<E> narrowedOther = (OurHashSet<E>) other;
 
         boolean res = false;
-        for (E e : narrowedOther.source.keySet()) {
+        for (E e : other) {
             res |= this.remove(e);
         }
 
@@ -58,24 +58,62 @@ public class OurHashSet<E> implements OurSet<E> {
 
     @Override
     public boolean retainAll(OurSet<E> other) {
-        OurHashSet<E> narrowedOther = (OurHashSet<E>) other;
-        OurHashSet<E> temp = new OurHashSet<>();
+//        Iterator<E> iterator = this.iterator();
+//
+//        boolean res = false;
+//        while(iterator.hasNext()){
+//            E e = iterator.next();
+//
+//            if(!other.contains(e)){
+//                iterator.remove();
+//                res = true;
+//            }
+//        }
 
-        boolean res = false;
 
-        for (E e : narrowedOther.source.keySet()) {
-            if (this.contains(e)) {
+
+        OurSet<E> temp = new OurHashSet<>();
+
+        for(E e:this){
+            if(!other.contains(e))
                 temp.add(e);
-            }
         }
-        this.source.clear();
 
-        for(E q:temp.source.keySet()){
-            this.add(q);
-        }
-        if (this.size() > 0)
-            res = true;
+        return this.removeAll((temp));
 
-        return res;
+//        boolean res = false;
+
+//        for (E e : this) {
+//            if (this.contains(e)) {
+//                temp.add(e);
+//            }
+//        }
+//        this.source.clear();
+//
+//        for(E q:temp.source.keySet()){
+//            this.add(q);
+//        }
+//        if (this.size() > 0)
+//            res = true;
+
+//        return res;
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return source.keySet().iterator();
+
+//        return new Iterator<E>() {
+//            @Override
+//            public boolean hasNext() {
+//                return false;
+//            }
+//
+//            @Override
+//            public E next() {
+//                return null;
+//            }
+//        };
     }
 }
+
