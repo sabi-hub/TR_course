@@ -16,9 +16,12 @@ public class Main {
         //Написать коллектор, который будет разделять Stream<String> на палиндромы и все остальное
         List<String> text = Arrays.asList("mama", "lol", "pop", "world");
         Map<Boolean, List<String>> res2 = text.stream()
-                .collect(Collectors
-                        .partitioningBy(word -> IntStream.range(0, word.length() / 2)
-                                .noneMatch(i -> word.charAt(i) != word.charAt(word.length() - i - 1))));
+                .collect( Collectors
+                .partitioningBy(word -> word.contentEquals(new StringBuilder(word).reverse())));
+//        Map<Boolean, List<String>> res2 = text.stream()
+//                .collect(Collectors
+//                        .partitioningBy(word -> IntStream.range(0, word.length() / 2)
+//                                .noneMatch(i -> word.charAt(i) != word.charAt(word.length() - i - 1))));
 
         System.out.println(res2);
 
