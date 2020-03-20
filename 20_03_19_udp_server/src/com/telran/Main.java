@@ -24,6 +24,9 @@ public class Main {
             // куда записать и размер пакеты
             DatagramPacket incomingPacket = new DatagramPacket(incomingData, INCOMING_DATAGRAM_SIZE);//входящие пакеты
             socket.receive(incomingPacket);
+
+            ServerProcessor sp = new ServerProcessor(socket, incomingPacket, incomingData);
+            executor.execute(sp);
 //
 //            //откуда данные, с какого индекса (0), размер от пакета (сколько в итоге пришло байт)
 //            String line = new String(incomingData, 0,incomingPacket.getLength());
@@ -34,8 +37,7 @@ public class Main {
 //                    ,incomingPacket.getAddress(), incomingPacket.getPort());
 //            socket.send(outgoingPacket);
 
-            ServerProcessor sp = new ServerProcessor(socket, incomingPacket, incomingData);
-            executor.execute(sp);
+
 
         }
 
