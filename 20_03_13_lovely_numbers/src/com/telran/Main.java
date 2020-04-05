@@ -31,5 +31,6 @@ public class Main {
             }
         }
         System.out.println(result);
+        System.out.println(result);
     }
 }
