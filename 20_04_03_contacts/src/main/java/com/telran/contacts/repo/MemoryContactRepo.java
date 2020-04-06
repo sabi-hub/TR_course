@@ -3,9 +3,12 @@ package com.telran.contacts.repo;
 import com.telran.contacts.dto.Contact;
 import org.springframework.stereotype.Repository;
 
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 @Repository
 public class MemoryContactRepo implements IContactRepo {
@@ -31,7 +34,15 @@ public class MemoryContactRepo implements IContactRepo {
 
     @Override
     public Contact remove(int id) {
-//        source.remove(id);
         return source.remove(id);
+    }
+
+    @Override
+    public List<Contact> getAll() {
+        return source
+                .values()
+                .stream()
+                .sorted(Comparator.comparingInt(Contact::getId))
+                .collect(Collectors.toList());
     }
 }
