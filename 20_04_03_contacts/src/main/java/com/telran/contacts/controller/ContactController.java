@@ -37,4 +37,24 @@ public class ContactController {
         model.addAttribute("contact", contact);
         return "contact";
     }
+
+    @GetMapping("remove/{id}")
+    public String removeContact(@PathVariable int id, Model model) {
+        Contact contact = contactService.remove(id);
+        model.addAttribute("contact", contact);
+        return "contact";
+    }
+
+    @GetMapping("edit/{id}")
+    public String editedContactForm(Model model) {
+//        Contact contact = contactService.get(id);
+        model.addAttribute("contact",  );
+        return "edit-form";
+    }
+
+    @GetMapping("edit")
+    public RedirectView editContact(@ModelAttribute Contact contact) {
+        contactService.edit(contact);
+        return new RedirectView("/");
+    }
 }

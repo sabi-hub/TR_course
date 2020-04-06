@@ -21,7 +21,7 @@ public class MemoryContactRepo implements IContactRepo {
 
     @Override
     public void edit(Contact contact) {
-
+        source.replace(contact.getId(), contact);
     }
 
     @Override
@@ -31,6 +31,7 @@ public class MemoryContactRepo implements IContactRepo {
 
     @Override
     public Contact remove(int id) {
-        return null;
+//        source.remove(id);
+        return source.remove(id);
     }
 }

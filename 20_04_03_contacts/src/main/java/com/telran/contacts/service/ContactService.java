@@ -20,4 +20,11 @@ public class ContactService {
     public Contact get(int id) {
         return contactRepo.get(id);
     }
+
+    public Contact remove (int id) {return  contactRepo.remove(id);}
+
+    public void edit (Contact contact) {
+        contactRepo.edit(contact);
+    }
+
 }
