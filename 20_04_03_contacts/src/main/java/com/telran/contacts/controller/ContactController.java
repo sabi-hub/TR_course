@@ -30,24 +30,10 @@ public class ContactController {
 
     @PostMapping("contact")
     public ModelAndView newContact(@ModelAttribute Contact contact) {
-        if (contact.getId() == 0) {
+        if (contact.getId() == 0)
             contactService.create(contact);
-        } else {
+        else
             contactService.edit(contact);
-        }
-        return new ModelAndView("redirect:/");
-    }
-
-    @GetMapping("contact/{id}")
-    public String getContact(@PathVariable int id, Model model) {
-        Contact contact = contactService.get(id);
-        model.addAttribute("contact", contact);
-        return "contact";
-    }
-
-    @GetMapping("remove/{id}")
-    public ModelAndView removeContact(@PathVariable int id) {
-        contactService.remove(id);
         return new ModelAndView("redirect:/");
     }
 
@@ -58,16 +44,29 @@ public class ContactController {
         return "contact-form";
     }
 
+    @GetMapping("contact/{id}")
+    public String getContact(@PathVariable int id, Model model) {
+        Contact contact = contactService.get(id);
+        model.addAttribute("contact", contact);
+        return "contact";
+    }
+
     @GetMapping("contacts")
-    public String getContacts(Model model){
+    public String getContacts(Model model) {
         List<Contact> contacts = contactService.getAll();
-        model.addAllAttributes("contacts", contacts);
-        return  contacts;
+        model.addAttribute("contacts", contacts);
+        return "contacts";
     }
 
     @GetMapping("/")
-    public ModelAndView home(){
-        return new ModelAndView("forward: contacts");
+    public ModelAndView home() {
+        return new ModelAndView("forward:contacts");
+    }
+
+    @GetMapping("remove/{id}")
+    public ModelAndView removeContact(@PathVariable int id) {
+        contactService.remove(id);
+        return new ModelAndView("redirect:/");
     }
 
 
