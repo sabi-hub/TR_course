@@ -10,7 +10,7 @@
 <body>
 
 <div class="row">
-    <a class="col s1 waves-effect waves-light btn blue darken-1" href="/contact">Add</a>
+    <a class="col s2 waves-effect waves-light btn blue darken-1" href="/contact">New Contact</a>
 </div>
 
 <div class="row">
@@ -20,7 +20,9 @@
         </li>
         <li class="collection-item" th:each="contact: ${contacts}">
             <div>
-                <span th:text="${contact.name} + ' ' + ${contact.lastName}"></span>
+                <a th:href="'/contact/' + ${contact.id}">
+                    <span th:text="${contact.name} + ' ' + ${contact.lastName}"></span>
+                </a>
                 <span class="secondary-content">
                     <a th:href="'/edit/' + ${contact.id}">
                         <i class="material-icons teal-text text-darken-1">create</i>
