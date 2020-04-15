@@ -1,31 +1,23 @@
-package com.telran.phone_book_app.dto;
+package com.telran.phone_book_app.entity;
 
 public class ContactAddress {
 
-    private String addressId;
+    private int addressId;
     private Contact contact;
-    private int zipCode;
+    private String zipCode;
     private String country;
     private String city;
     private String address;
-
-    public ContactAddress(String addressId, Contact contact, int zipCode, String country, String city, String address) {
-        this.addressId = addressId;
-        this.contact = contact;
-        this.zipCode = zipCode;
-        this.country = country;
-        this.city = city;
-        this.address = address;
-    }
+    private AddressType type;
 
     public ContactAddress() {
     }
 
-    public String getAddressId() {
+    public int getAddressId() {
         return addressId;
     }
 
-    public void setAddressId(String addressId) {
+    public void setAddressId(int addressId) {
         this.addressId = addressId;
     }
 
@@ -35,14 +27,6 @@ public class ContactAddress {
 
     public void setContact(Contact contact) {
         this.contact = contact;
-    }
-
-    public int getZipCode() {
-        return zipCode;
-    }
-
-    public void setZipCode(int zipCode) {
-        this.zipCode = zipCode;
     }
 
     public String getCountry() {
@@ -67,5 +51,17 @@ public class ContactAddress {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public AddressType getType() {
+        return type;
+    }
+
+    public void setType(AddressType type) {
+        this.type = type;
     }
 }

@@ -1,7 +1,7 @@
 package com.telran.phone_book_app.service;
 
-import com.telran.phone_book_app.dto.Contact;
-import com.telran.phone_book_app.dto.PhoneNumber;
+import com.telran.phone_book_app.entity.Contact;
+import com.telran.phone_book_app.entity.PhoneNumber;
 import com.telran.phone_book_app.repository.IPhoneNumberRepo;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +21,7 @@ public class PhoneNumberService {
     }
 
     public PhoneNumber get(String id) {
-        return phoneNumberRepo.get(id);
+        return phoneNumberRepo.find(id);
     }
 
     public PhoneNumber remove (String id) {return  phoneNumberRepo.remove(id);}
@@ -31,8 +31,8 @@ public class PhoneNumberService {
     }
 
     public List<PhoneNumber> getAll() {
-        return phoneNumberRepo.getAll();
+        return phoneNumberRepo.findAll();
     }
 
-    public List<Contact> searchByPhoneNumber(long number){return phoneNumberRepo.searchByPhoneNumber(number);}
+    public List<Contact> searchByPhoneNumber(long number){return phoneNumberRepo.findAllByCodePlusNumber(number);}
 }

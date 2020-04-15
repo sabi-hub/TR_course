@@ -1,6 +1,6 @@
 package com.telran.phone_book_app.repository;
 
-import com.telran.phone_book_app.dto.Contact;
+import com.telran.phone_book_app.entity.Contact;
 import org.springframework.stereotype.Repository;
 
 import java.util.Comparator;
@@ -28,7 +28,7 @@ public class MemoryContactRepo implements IContactRepo {
     }
 
     @Override
-    public Contact get(int id) {
+    public Contact find(int id) {
         return source.get(id);
     }
 
@@ -38,7 +38,7 @@ public class MemoryContactRepo implements IContactRepo {
     }
 
     @Override
-    public List<Contact> getAll() {
+    public List<Contact> findAll() {
         return source
                 .values()
                 .stream()
@@ -46,7 +46,7 @@ public class MemoryContactRepo implements IContactRepo {
                 .collect(Collectors.toList());
     }
 
-    public List<Contact> searchByName(String name) {
+    public List<Contact> findAllByName(String name) {
         return source
                 .values()
                 .stream()
@@ -54,7 +54,7 @@ public class MemoryContactRepo implements IContactRepo {
                 .collect(Collectors.toList());
     }
 
-    public List<Contact> searchByLastName(String lastName) {
+    public List<Contact> findAllByLastName(String lastName) {
 
         return source
                 .values()

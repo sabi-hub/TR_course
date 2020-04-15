@@ -1,8 +1,6 @@
-package com.telran.phone_book_app.dto;
+package com.telran.phone_book_app.entity;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class Contact {
     private int contactId;

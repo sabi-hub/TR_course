@@ -1,7 +1,7 @@
 package com.telran.phone_book_app.repository;
 
-import com.telran.phone_book_app.dto.Contact;
-import com.telran.phone_book_app.dto.PhoneNumber;
+import com.telran.phone_book_app.entity.Contact;
+import com.telran.phone_book_app.entity.PhoneNumber;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
@@ -31,7 +31,7 @@ public class MemoryPhoneNumberRepo implements IPhoneNumberRepo {
     }
 
     @Override
-    public PhoneNumber get(String id) {
+    public PhoneNumber find(String id) {
         return source.get(id);
     }
 
@@ -41,7 +41,7 @@ public class MemoryPhoneNumberRepo implements IPhoneNumberRepo {
     }
 
     @Override
-    public List<PhoneNumber> getAll() {
+    public List<PhoneNumber> findAll() {
         return source
                 .values()
                 .stream()
@@ -50,7 +50,7 @@ public class MemoryPhoneNumberRepo implements IPhoneNumberRepo {
     }
 
     @Override
-    public List<Contact> searchByPhoneNumber(long number) {
+    public List<Contact> findAllByCodePlusNumber(long number) {
         List<Contact> contactList = Collections.emptyList();
         List<PhoneNumber> phoneNumberList = source
                 .values()

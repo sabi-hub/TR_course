@@ -1,13 +1,10 @@
 package com.telran.phone_book_app.repository;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MemoryContactRepoTest {
@@ -29,4 +26,5 @@ class MemoryContactRepoTest {
 //        assertEquals(expected, contactRepo.searchByName("Vasya"));
         assertEquals(1, source.size());
     }
+
 }

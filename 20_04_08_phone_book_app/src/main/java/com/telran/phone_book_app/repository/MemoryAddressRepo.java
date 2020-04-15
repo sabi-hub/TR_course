@@ -1,7 +1,6 @@
 package com.telran.phone_book_app.repository;
 
-import com.telran.phone_book_app.dto.ContactAddress;
-import com.telran.phone_book_app.dto.PhoneNumber;
+import com.telran.phone_book_app.entity.ContactAddress;
 import org.springframework.stereotype.Repository;
 
 import java.util.Comparator;
@@ -33,7 +32,7 @@ public class MemoryAddressRepo implements IAddressRepo {
     }
 
     @Override
-    public ContactAddress get(String id) {
+    public ContactAddress find(String id) {
         return source.get(id);
     }
 
@@ -43,7 +42,7 @@ public class MemoryAddressRepo implements IAddressRepo {
     }
 
     @Override
-    public List<ContactAddress> getAll() {
+    public List<ContactAddress> findAll() {
         return source
                 .values()
                 .stream()

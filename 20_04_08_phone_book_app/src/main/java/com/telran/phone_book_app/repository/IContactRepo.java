@@ -1,6 +1,6 @@
 package com.telran.phone_book_app.repository;
 
-import com.telran.phone_book_app.dto.Contact;
+import com.telran.phone_book_app.entity.Contact;
 
 import java.util.List;
 
@@ -10,14 +10,16 @@ public interface IContactRepo {
 
     void edit(Contact contact);
 
-    Contact get(int id);
+    Contact find (int id);
 
     Contact remove(int id);
 
-    List<Contact> getAll();
+    boolean remove (Contact contact);
 
-    List<Contact> searchByName(String name);
+    List<Contact> findAll();
 
-    List<Contact> searchByLastName(String lastName);
+    List<Contact> findAllByName(String pattern);
+
+    List<Contact> findAllByLastName(String pattern);
 
 }

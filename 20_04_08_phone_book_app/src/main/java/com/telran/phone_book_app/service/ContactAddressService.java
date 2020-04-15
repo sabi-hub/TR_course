@@ -1,7 +1,6 @@
 package com.telran.phone_book_app.service;
 
-import com.telran.phone_book_app.dto.ContactAddress;
-import com.telran.phone_book_app.dto.PhoneNumber;
+import com.telran.phone_book_app.entity.ContactAddress;
 import com.telran.phone_book_app.repository.IAddressRepo;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +20,7 @@ public class ContactAddressService {
     }
 
     public ContactAddress get(String id) {
-        return addressRepo.get(id);
+        return addressRepo.find(id);
     }
 
     public ContactAddress remove(String id) {
@@ -33,6 +32,6 @@ public class ContactAddressService {
     }
 
     public List<ContactAddress> getAll() {
-        return addressRepo.getAll();
+        return addressRepo.findAll();
     }
 }
