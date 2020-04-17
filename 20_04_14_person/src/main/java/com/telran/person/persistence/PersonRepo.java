@@ -3,6 +3,7 @@ package com.telran.person.persistence;
 import com.telran.person.entity.Person;
 import org.springframework.data.repository.CrudRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface PersonRepo extends CrudRepository <Person, Integer> {
@@ -12,4 +13,6 @@ public interface PersonRepo extends CrudRepository <Person, Integer> {
     //findAll consists in the CrudRepository, but it iterable, what means, that it without streams.
     //If we want to use streams, we create own method "findAll" without implementation.
     public List<Person> findAll();
+
+    public List<Person> findByBirthdayAfterAndBirthdayBefore(LocalDate earliestBirthday, LocalDate latestBirthday);;
 }

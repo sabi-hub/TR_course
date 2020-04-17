@@ -8,6 +8,7 @@ import java.time.LocalDate;
 
 @Entity
 public class Person {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
@@ -40,5 +41,17 @@ public class Person {
 
     public LocalDate getBirthday() {
         return birthday;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
     }
 }
