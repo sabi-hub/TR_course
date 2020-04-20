@@ -6,7 +6,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.time.LocalDate;
 
-public class MoreThanYearsValidator implements ConstraintValidator<MoreThanYears, PersonDto> {
+public class MoreThanYearsValidator implements ConstraintValidator<MoreThanYears, LocalDate> {
 
    int minYears;
 
@@ -14,10 +14,12 @@ public class MoreThanYearsValidator implements ConstraintValidator<MoreThanYears
       minYears = constraint.value();
    }
 
-   public boolean isValid(PersonDto value, ConstraintValidatorContext context) {
+   @Override
+   public boolean isValid(LocalDate value, ConstraintValidatorContext context) {
       LocalDate now = LocalDate.now();
-      return now.minusYears(value.birthday.getYear()).getYear() >minYears;
+      return now.minusYears(value.getYear()).getYear() >minYears;
    }
+
 }
 
 
