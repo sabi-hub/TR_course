@@ -2,7 +2,10 @@ package com.telran.person.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.telran.person.validation.annotation.FullNameMaxLength;
+import com.telran.person.validation.annotation.MoreThanYears;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
@@ -11,15 +14,19 @@ public class PersonDto {
 
     public int id;
 
+    @NotNull
     @Size(max=10, min=1, message = "The first name '${validatedValue}' has wrong length")
     public String firstName;
 
+    @NotNull
     @Size(max=10, min=3, message = "{com.telran.person.second_name.validation.message}")
     public String lastName;
 
     @JsonFormat(pattern = "dd.MM.yyyy")
     //TODO sort out with Past/pastOrPresent and Future/FutureOrPresent
     //TODO write also a custom annotation validating more than 18 yo.
+//    @Past
+    @MoreThanYears(18)
     public LocalDate birthday;
 
     public PersonDto() {
