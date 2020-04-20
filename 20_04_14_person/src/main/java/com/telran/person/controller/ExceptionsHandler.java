@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,24 +38,19 @@ public class ExceptionsHandler {
         return res;
     }
 
-//    @ExceptionHandler(ConstraintViolationException.class)
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    @ResponseBody
-//    public List<FieldViolationDto> handleParameterExceptions(ConstraintViolationException e) {
-//
-//        //Todo write real handler
-//        List<FieldViolationDto> res = new ArrayList<>();
-//        List<Object> errors = Arrays.asList(e.getConstraintViolations().toArray());
-//
-//        for (Object error : errors) {
-//            FieldViolationDto violation;
-//            violation = new FieldViolationDto(error, error.getDefaultMessage());
-//            else
-//            violation = new FieldViolationDto(error.getObjectName(), error.getDefaultMessage());
-//            res.add(violation);
-//        }
-//        return res;
-//
-//        return res;
-//    }
+    @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public List<FieldViolationDto> handleParameterExceptions(ConstraintViolationException e) {
+
+        //Todo write real handler
+        List<FieldViolationDto> res = new ArrayList<>();
+        FieldViolationDto violationDto;
+
+            for (ConstraintViolation violation : e.getConstraintViolations()) {
+                violationDto = new FieldViolationDto(violation.getRootBeanClass().getName(), violation.getMessage());
+                res.add(violationDto);
+            }
+        return res;
+    }
 }
