@@ -15,6 +15,7 @@ import javax.validation.ConstraintViolationException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class ExceptionsHandler {
@@ -43,14 +44,11 @@ public class ExceptionsHandler {
     @ResponseBody
     public List<FieldViolationDto> handleParameterExceptions(ConstraintViolationException e) {
 
-        //Todo write real handler
-        List<FieldViolationDto> res = new ArrayList<>();
-        FieldViolationDto violationDto;
-
-            for (ConstraintViolation violation : e.getConstraintViolations()) {
-                violationDto = new FieldViolationDto(violation.getRootBeanClass().getName(), violation.getMessage());
-                res.add(violationDto);
-            }
-        return res;
+        return e.getConstraintViolations().stream()
+                .map(violation -> new FieldViolationDto(
+                        violation.getPropertyPath().toString(),
+                        violation.getMessage()
+                ))
+        .collect(Collectors.toList());
     }
 }

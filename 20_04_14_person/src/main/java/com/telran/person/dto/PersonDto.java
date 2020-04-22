@@ -3,13 +3,15 @@ package com.telran.person.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.telran.person.validation.annotation.FullNameMaxLength;
 import com.telran.person.validation.annotation.MoreThanYears;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.List;
 
 @FullNameMaxLength(15)
+@NoArgsConstructor
 public class PersonDto {
 
     public int id;
@@ -23,14 +25,11 @@ public class PersonDto {
     public String lastName;
 
     @JsonFormat(pattern = "dd.MM.yyyy")
-    //TODO sort out with Past/pastOrPresent and Future/FutureOrPresent
-    //TODO write also a custom annotation validating more than 18 yo.
 //    @Past
     @MoreThanYears(18)
     public LocalDate birthday;
 
-    public PersonDto() {
-    }
+    public List<NumberDto> numbers;
 
     public PersonDto(int id, String firstName, String lastName, LocalDate birthday) {
         this.id = id;
@@ -39,11 +38,4 @@ public class PersonDto {
         this.birthday = birthday;
     }
 
-    public void setBirthday(LocalDate birthday) {
-        this.birthday = birthday;
-    }
-
-    public LocalDate getBirthday() {
-        return birthday;
-    }
 }

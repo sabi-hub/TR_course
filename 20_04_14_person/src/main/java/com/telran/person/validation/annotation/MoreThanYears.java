@@ -15,7 +15,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Constraint(validatedBy = MoreThanYearsValidator.class)
 public @interface MoreThanYears {
 
-    int value() default Integer.MAX_VALUE;
+    int value() default 0;
 
     String message() default "{com.telran.person.birth_more_than.validation.message}";
 
