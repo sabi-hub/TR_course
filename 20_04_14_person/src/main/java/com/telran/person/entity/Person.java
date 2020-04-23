@@ -3,6 +3,8 @@ package com.telran.person.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -27,6 +29,7 @@ public class Person {
     private LocalDate birthday;
 
     @OneToMany(mappedBy = "person")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Number> numbers = new ArrayList<>();
 
     public Person(String name, String lastName, LocalDate birthday) {

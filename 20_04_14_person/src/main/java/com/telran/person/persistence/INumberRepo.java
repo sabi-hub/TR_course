@@ -8,4 +8,7 @@ import java.util.List;
 
 public interface INumberRepo extends CrudRepository<Number, Integer> {
     public List<Number> getByPerson(Person person);
+
+    List<Number> findByPersonId(int personId);
 }
+

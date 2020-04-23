@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -46,9 +48,22 @@ public class PersonService {
     }
 
     public List<PersonDto> getAll() {
+
         return personRepo.findAll().stream()
                 .map(personMapper::mapPersonToDto)
                 .collect(Collectors.toList());
+
+//        List<Person> persons = personRepo.findAll();
+//        List<PersonDto> res = new ArrayList<>();
+//
+//        for (Person person : persons) {
+//            PersonDto personDto = personMapper.mapPersonToDto(person);
+//            personDto.numbers = person.getNumbers().stream()
+//                    .map(numberMapper::mapNumberToDto)
+//                    .collect(Collectors.toList());
+//            res.add(personDto);
+//        }
+//        return res;
     }
 
     public List<PersonDto> getByName(String firstName) {

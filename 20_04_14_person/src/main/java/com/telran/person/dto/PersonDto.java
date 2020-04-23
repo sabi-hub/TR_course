@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @FullNameMaxLength(15)
@@ -29,7 +30,7 @@ public class PersonDto {
     @MoreThanYears(18)
     public LocalDate birthday;
 
-    public List<NumberDto> numbers;
+    public List<NumberDto> numbers = new ArrayList<>();
 
     public PersonDto(int id, String firstName, String lastName, LocalDate birthday) {
         this.id = id;
