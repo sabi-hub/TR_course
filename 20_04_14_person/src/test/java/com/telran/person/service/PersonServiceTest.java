@@ -21,13 +21,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
 
 @ExtendWith(MockitoExtension.class)
@@ -118,14 +119,101 @@ class PersonServiceTest {
         Person capturedPerson = personCaptore.getValue();
 
         verify(numberRepo, times(2)).save(any());
-        verify(numberRepo,times(1)).save(argThat(
+        verify(numberRepo, times(1)).save(argThat(
                 number -> number.getNumber().equals(numberDto1.number) &&
                         number.getPerson().equals(capturedPerson)));
-        verify(numberRepo,times(1)).save(argThat(
+        verify(numberRepo, times(1)).save(argThat(
                 number -> number.getNumber().equals(numberDto2.number) &&
                         number.getPerson().equals(capturedPerson)));
 //        verify(numberRepo,never()).save(argThat(
 //                number -> number.getNumber().equals(numberDto2.number) &&
 //                        number.getPerson().equals("kein")));
     }
+
+    @Test
+    public void testGetAll_personWithoutNumbers_onePersonZeroNumbers() {
+        List<Person> personList = new ArrayList<>();
+        LocalDate birthday = LocalDate.now().minusYears(25);
+        Person person = new Person("Vasily", "Kotov", birthday);
+        personList.add(person);
+
+        when(personRepo.findAll()).thenReturn(personList);
+
+        List<PersonDto> result = personService.getAll();
+
+        verify(personRepo).findAll();
+
+        assertEquals(1, result.size());
+    }
+
+    @Test
+    public void testGetAll_personsWithoutNumbers_twoPersonsZeroNumbers() {
+        LocalDate birthday = LocalDate.now().minusYears(25);
+        Person person1 = new Person("Vasily", "Kotov", birthday);
+        Person person2 = new Person("Petr", "Petrov", birthday);
+        List<Person> personList = Arrays.asList(person1, person2);
+
+        when(personRepo.findAll()).thenReturn(personList);
+
+        List<PersonDto> result = personService.getAll();
+
+        verify(personRepo).findAll();
+
+        assertEquals(2, result.size());
+    }
+
+    @Test
+    public void testGetByName_onePersonWithoutNumber_onePersonZeroNumbers(){
+        LocalDate birthday = LocalDate.now().minusYears(25);
+        Person person1 = new Person("Vasily", "Kotov", birthday);
+        List<Person> personList = Arrays.asList(person1);
+
+        when(personRepo.findByName("Vasily")).thenReturn(personList);
+
+        List<PersonDto> result = personService.getByName("Vasily");
+
+        verify(personRepo).findByName("Vasily");
+
+        assertEquals(1, result.size());
+
+    }
+
+//    @Test
+//    public void testGetByName_twoPersonsWithoutNumber_onePersonZeroNumbers(){
+//        LocalDate birthday = LocalDate.now().minusYears(25);
+//        PersonDto person1 = new PersonDto(1,"Vasily", "Kotov", birthday);
+//        PersonDto person2 = new PersonDto(2,"Petr", "Kotov", birthday);
+//        personService.create(person1);
+//        personService.create(person2);
+//
+//        Person person = new Person(person1.firstName,person1.lastName,person1.birthday);
+//
+//        List<PersonDto> personDtoList = Arrays.asList(person1,person2);
+//        List<Person> personList = Arrays.asList(person);
+//
+//
+//        when(personRepo.findByName("Vasily")).thenReturn(personList);
+//
+//        List<PersonDto> result = personService.getByName("Vasily");
+//
+//        verify(personRepo).findByName("Vasily");
+//
+//        assertEquals(1, result.size());
+//    }
+
+//    @Test
+//    public void testGetByName_twoPersonsWithoutNumber_twoPersonsZeroNumbers(){
+//        LocalDate birthday = LocalDate.now().minusYears(25);
+//        Person person2 = new Person("Petr", "Kotov", birthday);
+//        Person person3 = new Person("Petr", "Petin", birthday);
+//        List<Person> personList = Arrays.asList(person2,person3);
+//
+//        when(personRepo.findByName("Petr")).thenReturn(personList);
+//
+//        List<PersonDto> result = personService.getByName("Petr");
+//
+//        verify(personRepo).findByName("Petr");
+//
+//        assertEquals(2, result.size());
+//    }
 }
