@@ -62,7 +62,6 @@ class ContactListListener {
     }
 
     handleEvent(event) {
-
         const action = event.target.dataset.action;
         if (action === undefined)
             return;

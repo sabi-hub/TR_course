@@ -19,26 +19,11 @@ public class ContactController {
         this.contactService = contactService;
     }
 
-//    @GetMapping("contact")
-//    public String newContactFrom(Model model) {
-//        model.addAttribute("contact", new Contact());
-//        return "contact-form";
-//    }
-
     @GetMapping("/contact")
     @ResponseBody
     public List<Contact> newContactFrom() {
         return contactService.getAll();
     }
-
-//    @PostMapping("contact")
-//    public ModelAndView newContact(@ModelAttribute Contact contact) {
-//        if (contact.getId() == 0)
-//            contactService.create(contact);
-//        else
-//            contactService.edit(contact);
-//        return new ModelAndView("redirect:/");
-//    }
 
     @PostMapping("/contact")
     @ResponseBody
@@ -52,21 +37,6 @@ public class ContactController {
         contactService.edit(contact);
     }
 
-    @GetMapping("/edit-contact/{id}")
-    public String editContactForm(@PathVariable int id, Model model) {
-        Contact contact = contactService.get(id);
-        model.addAttribute("contact", contact);
-        return "contact-form";
-    }
-
-
-    @GetMapping("contact/{id}")
-    public String getContact(@PathVariable int id, Model model) {
-        Contact contact = contactService.get(id);
-        model.addAttribute("contact", contact);
-        return "contact";
-    }
-
     @GetMapping("/contacts")
     public String getContacts(Model model) {
         List<Contact> contacts = contactService.getAll();
@@ -78,12 +48,6 @@ public class ContactController {
     public ModelAndView home() {
         return new ModelAndView("forward:contacts");
     }
-
-//    @GetMapping("/remove-contact/{id}")
-//    public ModelAndView removeContact(@PathVariable int id) {
-//        contactService.remove(id);
-//        return new ModelAndView("redirect:/");
-//    }
 
     @DeleteMapping("/contact/{id}")
     @ResponseBody
