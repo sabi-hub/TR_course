@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Contact} from '../model/contact';
 import {ContactService} from '../service/contact.service';
 
@@ -30,6 +30,7 @@ export class ContactFormComponent implements OnInit {
     }
   }
 
+
   ngOnInit(): void {
     this.contact = new Contact();
     this.isAddingState = true;
@@ -37,5 +38,15 @@ export class ContactFormComponent implements OnInit {
 
   onClickAdd() {
     this.contactService.add(this.contact);
+  }
+
+  onClickEdit() {
+    this.contactService.edit(this.contact);
+    this.isAddingState = true;
+  }
+
+  onClickCancel() {
+    this.contactService.getAll();
+    this.isAddingState = true;
   }
 }

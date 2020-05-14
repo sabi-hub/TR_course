@@ -23,6 +23,10 @@ export class ContactService {
   remove(childContact: Contact) {
     this.contacts = this.contacts.filter(value => value.id !== childContact.id);
   }
+
+  edit(contact: Contact) {
+    Object.assign({}, contact);
+  }
 }
 
 const contacts: Contact[] = [
