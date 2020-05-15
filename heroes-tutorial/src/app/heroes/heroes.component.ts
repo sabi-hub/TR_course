@@ -3,6 +3,7 @@ import {Hero} from '../model/hero';
 import {HEROES} from '../service/mock-heroes';
 import {HeroService} from '../service/hero.service';
 import {Observable} from 'rxjs';
+import {MessageService} from '../service/message.service';
 
 @Component({
   selector: 'app-heroes',
@@ -15,7 +16,7 @@ export class HeroesComponent implements OnInit {
   heroes: Hero[];
   selectedHero: Hero;
 
-  constructor(private heroService: HeroService) {
+  constructor(private heroService: HeroService, private messageService: MessageService) {
   }
 
   // hero: Hero = {
@@ -31,5 +32,6 @@ export class HeroesComponent implements OnInit {
 
   onSelect(hero: Hero): void {
     this.selectedHero = hero;
+    this.messageService.add(`HeroService: Selected hero id=${hero.id}`);
   }
 }
