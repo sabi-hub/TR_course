@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HEROES} from './mock-heroes';
 import {Observable, of} from 'rxjs';
 import {Hero} from '../model/hero';
-import {delay} from 'rxjs/operators';
+import {delay, tap} from 'rxjs/operators';
 import {MessageService} from './message.service';
 
 @Injectable()
@@ -12,8 +12,10 @@ export class HeroService {
   }
 
   getHeroes(): Observable<Hero[]> {
-    this.messageService.add('HeroService: fetched heroes');
-    return of(HEROES).pipe(delay(1000));
+    // this.messageService.add('HeroService: fetched heroes');
+    return of(HEROES)
+      .pipe(delay(200))
+      .pipe(tap(x => this.messageService.add('HeroService: fetched heroes')));
   }
 
   getHero(id: number): Observable<Hero> {
