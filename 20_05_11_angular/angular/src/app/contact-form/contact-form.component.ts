@@ -21,7 +21,6 @@ export class ContactFormComponent implements OnInit {
     return this._contact;
   }
 
-
   @Input()
   set contact(value: Contact) {
     if (value) {
