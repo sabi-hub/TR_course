@@ -30,23 +30,29 @@ export class ContactFormComponent implements OnInit {
     }
   }
 
-
   ngOnInit(): void {
-    this.contact = new Contact();
+    this._contact = new Contact();
     this.isAddingState = true;
   }
 
-  onClickAdd() {
+  onClickAdd(): void {
     this.contactService.add(this.contact);
+    this.clearForm();
   }
 
-  onClickEdit() {
+  onClickEdit(): void {
     this.contactService.edit(this.contact);
+    this.clearForm();
     this.isAddingState = true;
   }
 
-  onClickCancel() {
+  onClickCancel(): void {
     this.contactService.getAll();
+    this.clearForm();
     this.isAddingState = true;
+  }
+
+  clearForm(): void {
+    this._contact = new Contact();
   }
 }

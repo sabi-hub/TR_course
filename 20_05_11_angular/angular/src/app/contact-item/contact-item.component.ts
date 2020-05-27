@@ -25,6 +25,6 @@ export class ContactItemComponent implements OnInit {
   }
 
   onClickEdit() {
-    this.edit.emit(this.childContact);
+    this.edit.emit(Object.assign({}, this.childContact));
   }
 }

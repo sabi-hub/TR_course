@@ -25,7 +25,8 @@ export class ContactService {
   }
 
   edit(contact: Contact) {
-    Object.assign({}, contact);
+    const contactToEdit: Contact =  this.contacts.find(value => value.id === contact.id);
+    Object.assign(contactToEdit, contact);
   }
 }
 
