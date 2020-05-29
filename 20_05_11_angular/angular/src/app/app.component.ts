@@ -22,8 +22,12 @@ export class AppComponent {
 
   title = 'Contacts';
 
-  editContact($event: Contact) {
-    console.log($event);
+  // editContact($event: Contact) {
+  //   console.log($event);
+  //   this.contactToEdit = $event;
+  // }
+
+  onEditContact($event: Contact) {
     this.contactToEdit = $event;
   }
 }

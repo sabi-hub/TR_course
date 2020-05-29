@@ -1,12 +1,14 @@
 import {Injectable} from '@angular/core';
 import {Contact} from '../model/contact';
+import {Observable, of} from 'rxjs';
+import {ContactEventService} from './contact-event.service';
 
 @Injectable()
 export class ContactService {
 
   contacts: Contact[];
 
-  constructor() {
+  constructor(private contactItemService: ContactEventService) {
     this.contacts = contacts;
   }
 
@@ -19,6 +21,11 @@ export class ContactService {
   getAll(): Contact[] {
     return this.contacts;
   }
+
+  // getContacts(): Observable<Contact[]> {
+  //   this.contactItemService.onClickEdit();
+  //   return of(contacts);
+  // }
 
   remove(childContact: Contact) {
     this.contacts = this.contacts.filter(value => value.id !== childContact.id);
