@@ -1,0 +1,27 @@
+<form class="row" id="contact-form">
+  <div class="col s1">
+    <button class="col s12 waves-effect waves-light btn blue darken-1" *ngIf="isAddingState" (click)="onClickAdd()" >
+      Add
+    </button>
+    <button class="col s12 waves-effect waves-light btn blue darken-1" *ngIf="!isAddingState" (click)="onClickEdit()" >Edit</button>
+  </div>
+  <div class="col s1">
+    <button class="col s12 waves-effect waves-light btn blue darken-1" *ngIf="!isAddingState" (click)="onClickCancel()" >Cancel</button>
+  </div>
+  <div class="col s1">
+  </div>
+
+  <input type="hidden" name="id" [(ngModel)]="contact.id">
+  <div class="input-field col s3">
+    <input type="text" id="nameField" name="name" [(ngModel)]="contact.name">
+    <label for="nameField">Name</label>
+  </div>
+  <div class="input-field col s3">
+    <input type="text" id="lastNameField" name="lastName" [(ngModel)]="contact.lastName">
+    <label for="lastNameField">Last Name</label>
+  </div>
+  <div class="input-field col s3">
+    <input type="text" id="age" name="id" [(ngModel)]="contact.age">
+    <label for="age">Age</label>
+  </div>
+</form>

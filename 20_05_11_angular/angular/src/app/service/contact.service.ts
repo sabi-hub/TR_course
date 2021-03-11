@@ -1,0 +1,46 @@
+import {Injectable} from '@angular/core';
+import {Contact} from '../model/contact';
+import {Observable, of} from 'rxjs';
+import {ContactEventService} from './contact-event.service';
+
+@Injectable()
+export class ContactService {
+
+  contacts: Contact[];
+
+  constructor(private contactItemService: ContactEventService) {
+    this.contacts = contacts;
+  }
+
+  add(contact: Contact): void {
+    contact.id = this.contacts.length + 1;
+    const objectToAdd: Contact = Object.assign({}, contact);
+    this.contacts.push(objectToAdd);
+  }
+
+  getAll(): Contact[] {
+    return this.contacts;
+  }
+
+  // getContacts(): Observable<Contact[]> {
+  //   this.contactItemService.onClickEdit();
+  //   return of(contacts);
+  // }
+
+  remove(childContact: Contact) {
+    this.contacts = this.contacts.filter(value => value.id !== childContact.id);
+  }
+
+  edit(contact: Contact) {
+    const contactToEdit: Contact =  this.contacts.find(value => value.id === contact.id);
+    Object.assign(contactToEdit, contact);
+  }
+}
+
+const contacts: Contact[] = [
+  {id: 1, name: 'Vasya', lastName: 'Vasin', age: 20},
+  {id: 2, name: 'Petya', lastName: 'Petin', age: 25},
+  {id: 3, name: 'Masha', lastName: 'Mashina', age: 30},
+  {id: 4, name: 'Olya', lastName: 'Olina', age: 22},
+  {id: 5, name: 'Stepa', lastName: 'Stepin', age: 10}
+];
